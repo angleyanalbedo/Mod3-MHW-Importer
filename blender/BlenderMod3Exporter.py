@@ -49,7 +49,7 @@ class MeshClone():
         return self.original
         with SupressBlenderOps():
             self.copy = self.original.copy()
-            bpy.context.scene.objects.link(self.copy)
+            bpy.context.collection.objects.link(self.copy)
             bpy.context.scene.objects.active = self.copy
             self.original.select = False
             self.copy.select = True

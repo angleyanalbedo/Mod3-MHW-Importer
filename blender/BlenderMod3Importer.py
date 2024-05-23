@@ -96,7 +96,7 @@ class BlenderImporterAPI(ModellingAPI):
         bpy.ops.object.select_all(action='DESELECT')
         blenderArmature = bpy.data.armatures.new('%s Armature'%filename)
         arm_ob = bpy.data.objects.new('%s Armature'%filename, blenderArmature)
-        bpy.context.scene.objects.link(arm_ob)
+        bpy.context.collection.objects.link(arm_ob)
         bpy.context.scene.update()
         arm_ob.select = True
         arm_ob.show_x_ray = True
@@ -348,7 +348,7 @@ class BlenderImporterAPI(ModellingAPI):
         blenderMesh.update()
         blenderObject = bpy.data.objects.new("%s LOD %d"%(name,meshpart["properties"]["lod"]), blenderMesh)
         BlenderImporterAPI.dbg.write("Geometry Link\n")
-        bpy.context.scene.objects.link(blenderObject)
+        bpy.context.collection.objects.link(blenderObject)
         return blenderMesh, blenderObject
     
     @staticmethod
@@ -399,7 +399,7 @@ class BlenderImporterAPI(ModellingAPI):
     def createRootNub(miniscene):
         o = bpy.data.objects.new("Root", None )
         miniscene[255]=o
-        bpy.context.scene.objects.link( o )
+        bpy.context.collection.objects.link( o )
         o.show_wire = True
         o.show_x_ray = True
         return
@@ -415,7 +415,7 @@ class BlenderImporterAPI(ModellingAPI):
         name = "BoneFunction.%03d" % bone["CustomProperties"]["boneFunction"]
         o = bpy.data.objects.new(name, None )#ix
         miniscene[ix]=o
-        bpy.context.scene.objects.link( o )
+        bpy.context.collection.objects.link( o )
         #if bone["parentId"]!=255:
         parentName = bone["parentId"]
         if parentName not in miniscene:
@@ -488,7 +488,7 @@ class BlenderImporterAPI(ModellingAPI):
                 groupName = "BoneFunction.%s"%groupId
                 for vertex,weight in group:
                     if groupName not in blenderObject.vertex_groups:
-                        blenderObject.vertex_groups.new(groupName)#blenderObject Maybe?
+                        blenderObject.vertex_groups.new(name=groupName)#blenderObject Maybe?
                     blenderObject.vertex_groups[groupName].add([vertex], weight, 'ADD')
         return
     
@@ -566,7 +566,7 @@ class BlenderImporterAPI(ModellingAPI):
         constraint = lattice_ob.constraints.new("CHILD_OF")
         constraint.target = armature[box.bone()] if box.bone() in armature else None
         lattice["Type"] = "MOD3_BoundingBox_AABB"
-        bpy.context.scene.objects.link(lattice_ob)
+        bpy.context.collection.objects.link(lattice_ob)
         bpy.context.scene.update()
         return lattice_ob
     
@@ -585,7 +585,7 @@ class BlenderImporterAPI(ModellingAPI):
             lattice_ob["bone_index"] = box.bone()
         constraint.target = armature[box.bone()] if box.bone() in armature else None
         lattice["Type"] = "MOD3_BoundingBox_MVBB"
-        bpy.context.scene.objects.link(lattice_ob)
+        bpy.context.collection.objects.link(lattice_ob)
         bpy.context.scene.update()
         return lattice_ob
 

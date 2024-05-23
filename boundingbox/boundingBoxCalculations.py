@@ -56,7 +56,7 @@ with open(r"%s","r") as outf:
 #Points to mesh
 mesh = bpy.data.meshes.new("mesh") 
 obj = bpy.data.objects.new("MyObject", mesh)
-bpy.context.scene.objects.link(obj)
+bpy.context.collection.objects.link(obj)
 b = bmesh.new()
 for v in points:
 	b.verts.new(v)
@@ -74,7 +74,7 @@ lattice_ob = bpy.data.objects.new(name, lattice)
 lattice_ob.matrix_world = mat
 lattice_ob.scale = (2*vec)[:3]
 lattice["Type"] = "MOD3_BoundingBox"
-bpy.context.scene.objects.link(lattice_ob)
+bpy.context.collection.objects.link(lattice_ob)
 bpy.context.scene.update()
         """%(path,str(mat),str(vec))
     

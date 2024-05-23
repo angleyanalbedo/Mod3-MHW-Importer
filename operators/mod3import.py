@@ -117,7 +117,7 @@ class ImportMOD3(Operator, ImportHelper):
             options["High LOD"]=True
         if self.import_header:
             options["Scene Header"]=True
-        if self.import_skeleton != "None":
+        if self.import_skeleton in {'EmptyTree', 'Armature'}:
             options["Skeleton"]=self.import_skeleton
         if self.import_meshparts:
             options["Mesh Parts"]=True
@@ -131,7 +131,7 @@ class ImportMOD3(Operator, ImportHelper):
             options["Omit Unused Groups"]=True
         if self.load_group_functions:
             options["Load Groups and Functions"]=True
-        options["Split Weights"]=self.weight_format
+        options["Split Weights"]="Group"
         return options
 
 def menu_func_import(self, context):
