@@ -1,3 +1,4 @@
+# can load by blender 4.1
 # Mod3-MHW-Importer
 Blender Mod3 Import-Exporter for Monster Hunter World. Written for Blender 2.79, no update for further Blender versions is planned (feel free to fork if you are interested in doing it yourself).
 
