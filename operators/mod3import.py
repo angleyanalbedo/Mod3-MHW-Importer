@@ -117,8 +117,8 @@ class ImportMOD3(Operator, ImportHelper):
             options["High LOD"]=True
         if self.import_header:
             options["Scene Header"]=True
-        if self.import_skeleton in {'EmptyTree', 'Armature'}:
-            options["Skeleton"]=self.import_skeleton
+        if self.import_skeleton is not None:
+            options["Skeleton"]="EmptyTree"
         if self.import_meshparts:
             options["Mesh Parts"]=True
         if self.high_lod:

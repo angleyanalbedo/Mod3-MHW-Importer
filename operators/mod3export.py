@@ -85,7 +85,7 @@ class ExportMOD3(Operator, ExportHelper):
                 pass
             bpy.ops.object.select_all(action='DESELECT')
             for obj in bpy.context.scene.objects:
-                obj.select = obj.type == "MESH"
+                obj.select_set(obj.type == "MESH")
             bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
             bpy.ops.object.select_all(action='DESELECT')
 
@@ -94,7 +94,7 @@ class ExportMOD3(Operator, ExportHelper):
         with SupressBlenderOps():
             bpy.ops.object.select_all(action='DESELECT')
             for ob in bpy.context.selected_objects:
-                ob.select = False
+                ob.select_set(False)
         #bpy.ops.object.mode_set(mode='OBJECT')
         #bpy.context.area.type = 'INFO'
         return {'FINISHED'}

@@ -75,7 +75,7 @@ lattice_ob.matrix_world = mat
 lattice_ob.scale = (2*vec)[:3]
 lattice["Type"] = "MOD3_BoundingBox"
 bpy.context.collection.objects.link(lattice_ob)
-bpy.context.scene.update()
+bpy.context.view_layer.update()
         """%(path,str(mat),str(vec))
     
     def analyzeFile(path):
